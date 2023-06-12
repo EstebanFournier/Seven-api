@@ -10,7 +10,7 @@ class Drivers extends Model
     use HasFactory;
     /**
      * The attributes tha are mass assignable.
-     * 
+     *
      * @var array<int, string>
      */
     protected $table = 'drivers';
@@ -25,8 +25,12 @@ class Drivers extends Model
         'company_id',
     ];
 
-    public function company()
+    /*public function company()
     {
         return $this->belongsTo(Companies::class, 'company_id');
+    }*/
+
+    public function booking(){
+        return $this->hasMany(Booking::class);
     }
 }

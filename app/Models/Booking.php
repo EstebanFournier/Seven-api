@@ -10,20 +10,38 @@ class Booking extends Model
     use HasFactory;
     /**
      * The attributes tha are mass assignable.
-     * 
+     *
      * @var array<int, string>
      */
     protected $table = 'booking';
     protected $fillable = [
-        'booker_id',
+        'number',
+        'date',
+        'dateStart',
+        'dateEnd',
+        'halfDayStart',
+        'halfDayEnd',
+        'status',
+        'driver_id',
         'vehicle_id',
-        'drivers_id',
-        'ticket_id',
-        'agency_id',
-        'journey_trip_id',
+        'placeStart_id',
+        'placeEnd_id',
     ];
 
-    public function agencies()
+    public function booking_driver(){
+        return $this->belongsTo(Drivers::class);
+    }
+    public function booking_vehicle(){
+        return $this->belongsTo(Vehicles::class);
+    }
+    public function booking_placeStart(){
+        return $this->belongsTo(PlaceStart::class);
+    }
+    public function booking_placeEnd(){
+        return $this->belongsTo(PlaceEnd::class);
+    }
+
+    /*public function agencies()
     {
         return $this->belongsTo(Agencies::class, 'agency_id');
     }
@@ -31,5 +49,5 @@ class Booking extends Model
     public function drivers()
     {
         return $this->belongsTo(Drivers::class, 'drivers_id');
-    }
+    }*/
 }

@@ -20,11 +20,15 @@ class Vehicles extends Model
     ];
 
 
-    public function booker() {
-        return $this->belongsTo(User::class);
+    public function booking() {
+        return $this->hasMany(Booking::class);
     }
 
-    public function agencies() {
+    /*public function agencies() {
         return $this->belongsTo(Agencies::class, 'agency_id');
+    }*/
+
+    public function withdrawalTicket(){
+        return $this->belongsTo(WithdrawalTicket::class);
     }
 }

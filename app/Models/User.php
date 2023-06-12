@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -42,17 +43,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function user_category() {
+    public function user_category(){
         return $this->belongsTo(UserCategory::class);
     }
 
-    public function companies() {
+    public function user_company() {
         return $this->belongsTo(Companies::class);
     }
 
-    public function agencies() {
+    /*public function agencies() {
         return $this->belongsTo(Agencies::class);
-    }
+    }*/
 
     public function is_seven_agent() {
         return $this->user_category->ref == "seven-agent";

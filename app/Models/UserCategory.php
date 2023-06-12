@@ -20,11 +20,14 @@ class UserCategory extends Model
         'ref',
     ];
 
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 
     /**
-     * 
+     *
      */
-    static public function client_admin() {
+    /*static public function client_admin() {
         return UserCategory::where("ref", "client-admin")->get()[0];
     }
 
@@ -33,14 +36,15 @@ class UserCategory extends Model
     }
 
     static public function client_booker() {
-        return UserCategory::where("ref", "client-booker")->get()[0];
+        //return UserCategory::where("ref", "client-booker")->get()[0];
+        return UserCategory::class;
     }
 
     static public function seven_agent() {
         return UserCategory::where("ref", "seven-agent")->get()[0];
     }
-    
+
     static public function seven_controller() {
         return UserCategory::where("ref", "seven-controller")->get()[0];
-    }
+    }*/
 }

@@ -13,21 +13,25 @@ class WithdrawalTicket extends Model
         'userCreator_id',
         'vehicleModel',
         'vehicleMatriculation',
-        //booking_id',
-        'mileage',
-        'dateHourControl',
+        'booking_id',
+        'mileage',//<-
+        'dateHourControl',//<-
         'aileAVG',
         'aileARG',
         'calandre',
         'phareAVD',
         'siegePass',
         'porteAVG',
-        'aileAVG',
+        'aileAVD',
         'aileARD',
         'phareAVG',
         'siegeCond',
         'tdb',
         'porteAVD',
-        'observation',
+        'observation',//<-
     ];
+
+    public function vehicle(){
+        return $this->belongsTo(Vehicles::class);
+    }
 }
