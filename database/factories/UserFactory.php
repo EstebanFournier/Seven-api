@@ -13,7 +13,7 @@ class UserFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
-     * 
+     *
      * @var string
      */
     protected $model = User::class;
@@ -29,12 +29,13 @@ class UserFactory extends Factory
         $companies = Companies::all()->pluck('id')->toArray();
         $agencies = Agencies::all()->pluck('id')->toArray();
         return [
-            'name' => $this->faker->userName,
+            'firstname' => $this->faker->userName,
+            'lastname' => $this->faker->userName,
             'email' => $this->faker->email,
             'password' => Hash::make('12345'),
-            'user_category_id' => $this->faker->randomElement($user_category),
-            'company_id' => $this->faker->randomElement($companies),
-            'agency_id'=>$this->faker->randomElement($agencies),
+            'roleId' => $this->faker->randomElement($user_category),
+            'companyId' => $this->faker->randomElement($companies),
+            //'agency_id'=>$this->faker->randomElement($agencies),
         ];
     }
 }
