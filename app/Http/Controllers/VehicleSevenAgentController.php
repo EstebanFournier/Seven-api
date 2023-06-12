@@ -20,12 +20,14 @@ class VehicleSevenAgentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $vehicle = Vehicles::find($id);
+        //$vehicle = Vehicles::find($id);
+        $vehicle = Vehicles::where('immatriculation','=','379978')->get();
+        dd($vehicle);
         $vehicle->update($request->all());
         return $vehicle;
     }
 
-    public function createWithdrawalTicket(Request $request)
+    /*public function createWithdrawalTicket(Request $request)
     {
         $request->validate([
             'vehicleModel' => 'required',
@@ -45,9 +47,9 @@ class VehicleSevenAgentController extends Controller
             'siegeCond' => 'required',
             'tdb' => 'required',
             'porteAVD' => 'required',
-            'observation' => 'required', */
+            'observation' => 'required',
         ]);
 
         return WithdrawalTicket::create($request->all());
-    }
+    }*/
 }

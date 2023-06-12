@@ -6,7 +6,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companies;
 use App\Models\User;
+use App\Models\UserCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -63,9 +65,15 @@ class AuthController extends Controller
 
         $token = $user->createToken('myapptoken')->plainTextToken;
 
+        $userCategory = UserCategory::find($user['user_category_id']);
+        $userCompany = Companies::find($user['user_company_id']);
+
         $response = [
+            'token' => $token,
             'user' => $user,
-            'token' => $token
+            'roles'=>$userCategory,
+            'company'=>$userCompany,
+
         ];
 
         return response($response, 201);
@@ -88,6 +96,16 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $users =User::all();
+        $response =[];
+        foreach($users as $user){
+            $userCategory = UserCategory::find($user['user_category_id']);
+            $userCompany = Companies::find($user['user_company_id']);
+            $user['role']=$userCategory;
+            $user['company']=$userCompany;
+
+            $response[]=$user;
+        }
+        return $response;
     }
 }
