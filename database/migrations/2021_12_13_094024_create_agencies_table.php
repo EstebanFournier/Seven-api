@@ -19,17 +19,17 @@ class CreateAgenciesTable extends Migration
             $table->string("name");
         });
 
-        Schema::table('users', function (Blueprint $table) {
+        /*Schema::table('users', function (Blueprint $table) {
             $table->foreignId("agency_id")->nullable()->references("id")->on("agencies");
-        });
+        });*/
 
         Schema::table('vehicles', function (Blueprint $table) {
             $table->foreignId("agency_id")->references("id")->on("agencies");
         });
-        
-        Schema::table('booking', function (Blueprint $table) {
+
+        /*Schema::table('booking', function (Blueprint $table) {
             $table->foreignId("agency_id")->references("id")->on("agencies");
-        });
+        });*/
     }
 
     /**

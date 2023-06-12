@@ -18,15 +18,15 @@ class CreateJourneyTripTable extends Migration
             $table->timestamps();
             $table->enum('type', ['Aller simple', 'Aller retour']);
             $table->string('cityStart');
-            $table->string('cityEnd'); 
+            $table->string('cityEnd');
             $table->datetime('dateStart');
             $table->datetime('dateEnd');
             $table->float('nbPassenger');
         });
 
-        Schema::table('booking', function (Blueprint $table) {
+        /*Schema::table('booking', function (Blueprint $table) {
             $table->foreignId("journey_trip_id")->references("id")->on("journey_trip");
-        });
+        });*/
     }
 
     /**

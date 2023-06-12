@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class PlaceEnd extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('placeEnd', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('postalCode');
+            $table->string('city');
             $table->timestamps();
-            $table->string("name");
         });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId("user_company_id")->references("id")->on("companies");
+        Schema::table('booking', function (Blueprint $table) {
+            $table->foreignId("placeEnd_id")->references("id")->on("placeEnd");
         });
     }
 
@@ -31,6 +33,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('placeEnd');
     }
 }

@@ -35,7 +35,7 @@ class CreateWithdrawalTicketTable extends Migration
             $table->enum("porteAVD", ['RS', 'RP', 'EC'])->nullable();
             $table->string("observation")->nullable();
             $table->timestamps();
-            
+
         });
     }
 

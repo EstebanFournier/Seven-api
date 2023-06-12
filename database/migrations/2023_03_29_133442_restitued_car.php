@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class RestituedCar extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('RestituedCar', function (Blueprint $table) {
             $table->id();
+            $table->string('model');
+            $table->string('licensePlate');
+            $table->string('statusVehicle');
             $table->timestamps();
-            $table->string("name");
-        });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId("user_company_id")->references("id")->on("companies");
         });
     }
 
@@ -31,6 +29,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('RestituedCar');
     }
 }
