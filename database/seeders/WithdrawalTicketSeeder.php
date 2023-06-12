@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\WithdrawalTicket;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class WithdrawalTicketSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //User::factory(10)->create();
+        WithdrawalTicket::factory(5)->create();
     }
 }

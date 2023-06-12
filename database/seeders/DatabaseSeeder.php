@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Agencies;
+use App\Models\RestituedCar;
+use App\Models\WithdrawalTicket;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -57,56 +59,77 @@ class DatabaseSeeder extends Seeder
         $this->call(VehiclesSeeder::class);
         $this->call(ReturnTicketSeeder::class);
         $this->call(JourneyTripSeeder::class);
-        
+        $this->call(placeEndSeeder::class);
+        $this->call(placeStartSeeder::class);
+        $this->call(RestituedCarSeeder::class);
+        $this->call(WithdrawalTicketSeeder::class);
+
         $this->call(BookingSeeder::class);
 
+        $company_seven_admin = new Companies();
+        $company_seven_admin->name= "seven Admin Company";
+        $company_seven_admin->save();
 
-        $client_admin_role = UserCategory::client_admin();
-        $seven_admin_role = UserCategory::seven_admin();
-        $client_booker_role = UserCategory::client_booker();
-        $seven_agent_role = UserCategory::seven_agent();
-        $seven_controller_role = UserCategory::seven_controller();
+        $company_seven_agent = new Companies();
+        $company_seven_agent->name= "seven agent Company";
+        $company_seven_agent->save();
 
-        $agencies = Agencies::all()->pluck('id')->toArray();
+        $company_seven_controller = new Companies();
+        $company_seven_controller->name= "seven controller Company";
+        $company_seven_controller->save();
+
+        $company_client_booker = new Companies();
+        $company_client_booker->name= "client booker Company";
+        $company_client_booker->save();
+
+        $company_client_admin = new Companies();
+        $company_client_admin->name= "client admin Company";
+        $company_client_admin->save();
 
         $user = new User();
-        $user->name = "test seven admin";
+        $user->firstname = "test seven admin";
+        $user->lastname = "admin";
+        $user->email = "admin@seven.fr";
         $user->password = Hash::make("test");
-        $user->email = "sevenadminexample@example.org";
         $user->user_category()->associate($seven_admin_role);
-        $user->agency_id = 1;
+        $user->user_company()->associate($company_seven_admin);
         $user->save();
 
+
         $user = new User();
-        $user->name = "test seven agent";
+        $user->firstname = "test seven agent";
+        $user->lastname = "agent";
+        $user->email = "agent@seven.fr";
         $user->password = Hash::make("test");
-        $user->email = "sevenagentexample@example.org";
         $user->user_category()->associate($seven_agent_role);
-        $user->agency_id = 2;
+        $user->user_company()->associate($company_seven_agent);
         $user->save();
 
         $user = new User();
-        $user->name = "test seven controller";
+        $user->firstname = "test seven controller";
+        $user->lastname = "controller";
         $user->password = Hash::make("test");
-        $user->email = "sevencontrollerexample@example.org";
+        $user->email = "controller@seven.fr";
         $user->user_category()->associate($seven_controller_role);
-        $user->agency_id = 3;
+        $user->user_company()->associate($company_seven_controller);
         $user->save();
 
         $user = new User();
-        $user->name = "test client booker";
+        $user->firstname = "test client booker";
+        $user->lastname = "booker";
         $user->password = Hash::make("test");
-        $user->email = "clientbookerexample@example.org";
+        $user->email = "clientbooker@seven.fr";
         $user->user_category()->associate($client_booker_role);
-        $user->agency_id = 4;
+        $user->user_company()->associate($company_client_booker);
         $user->save();
 
         $user = new User();
-        $user->name = "test client admin";
+        $user->firstname = "test client admin";
+        $user->lastname = "admin";
         $user->password = Hash::make("test");
-        $user->email = "clientadminexample@example.org";
+        $user->email = "clientadmin@seven.fr";
         $user->user_category()->associate($client_admin_role);
-        $user->agency_id = 5;
+        $user->user_company()->associate($company_client_admin);
         $user->save();
     }
 
@@ -169,7 +192,7 @@ class DatabaseSeeder extends Seeder
 
             $agency = new Agency();
             $agency->name = "Agency of " . $faker->city();
-            $agency->save(); 
+            $agency->save();
 
             $an_agency = $agency;
 
